@@ -10,14 +10,36 @@ let aciertos = 0;
 // obteniendo el elemento HTML de movimientos
 let mostrarMovimientos = document.querySelector('#movimientos');
 let mostarAciertos = document.querySelector('#aciertos');
+let btnReiniciar = document.querySelector('.btn-reiniciar');
+let btns= document.querySelectorAll('.btn-cuadros');
+console.log(btns);
 
+
+
+
+// boton para reiniciar
+btnReiniciar.addEventListener("click", reiniciarJuego);
+function reiniciarJuego() {
+    btns.forEach(btn =>{
+        btn.textContent= '';
+        btn.disabled = false;
+    })
+    tarjetasDestapadas = 0; 
+    mostarAciertos.innerHTML= `Aciertos: 0`;
+    mostrarMovimientos.innerHTML= `Movimientos: 0`;
+    aciertos=0;
+    movimientos=0;
+    numeros = numeros.sort(()=>{return Math.random()-.5});
+    return numeros;
+}
 // generar el arreglo de numeros aleatorios
 numeros = numeros.sort(()=>{return Math.random()-.5});
-console.log(numeros);
+
 
 // funcion principal
 function destapar(id) {
     tarjetasDestapadas++;
+
     
     if (tarjetasDestapadas === 1) {
         // mostrar el numero que seleccionamos
@@ -45,6 +67,10 @@ function destapar(id) {
             // aumentar aciertos
             aciertos++;
             mostarAciertos.innerHTML= `Aciertos: ${aciertos}`;
+            if (aciertos == 8) {
+                mostarAciertos.textContent= `Acabas de Ganar!!;`
+            }
+            
 
         }
         else{
@@ -54,7 +80,7 @@ function destapar(id) {
                 tarjeta1.disabled= false,
                 tarjet2.disabled = false;
                 tarjetasDestapadas = 0;
-            }, 2000);
+            }, 800);
         }
 
     } 
