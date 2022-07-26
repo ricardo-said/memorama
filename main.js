@@ -5,6 +5,11 @@ let tarjeta1 = null;
 let tarjet2 = null;
 let primerResultado = null;
 let segundoResultado = null;
+let movimientos = 0;
+let aciertos = 0;
+// obteniendo el elemento HTML de movimientos
+let mostrarMovimientos = document.querySelector('#movimientos');
+let mostarAciertos = document.querySelector('#aciertos');
 
 // generar el arreglo de numeros aleatorios
 numeros = numeros.sort(()=>{return Math.random()-.5});
@@ -29,6 +34,29 @@ function destapar(id) {
         segundoResultado = numeros[id];
         tarjet2.innerHTML = segundoResultado;
         tarjet2.disabled= true;
+
+    // incrementar moviminetos 
+    movimientos++;
+    mostrarMovimientos.innerHTML= `Movimientos: ${movimientos}`;
+        // 
+        if (primerResultado == segundoResultado) {
+            tarjetasDestapadas = 0;
+            
+            // aumentar aciertos
+            aciertos++;
+            mostarAciertos.innerHTML= `Aciertos: ${aciertos}`;
+
+        }
+        else{
+            setTimeout(() => {
+                tarjeta1.innerHTML= '';
+                tarjet2.innerHTML= '';
+                tarjeta1.disabled= false,
+                tarjet2.disabled = false;
+                tarjetasDestapadas = 0;
+            }, 2000);
+        }
+
     } 
 
 }
