@@ -14,10 +14,10 @@ let btnReiniciar = document.querySelector('.btn-reiniciar');
 let btns= document.querySelectorAll('.btn-cuadros');
 
 // objetos de audio
-let aciertoAudio = new Audio('/estilos/sounds/acierto.wav');
 let clicktoAudio = new Audio('/estilos/sounds/click.wav');
 let errortoAudio = new Audio('/estilos/sounds/error.wav');
 let ganoAudio = new Audio('/estilos/sounds/gano.wav');
+let aciertoAudio = new Audio("/estilos/sounds/aciertos.wav");
 
 
 
@@ -34,12 +34,10 @@ function reiniciarJuego() {
     aciertos=0;
     movimientos=0;
     numeros = numeros.sort(()=>{return Math.random()-.5});
-    console.log(numeros);
     return numeros;
 }
 // generar el arreglo de numeros aleatorios
 numeros = numeros.sort(()=>{return Math.random()-.5});
-console.log(numeros);
 
 // funcion principal
 function destapar(id) {
@@ -50,7 +48,6 @@ function destapar(id) {
     if (tarjetasDestapadas === 1) {
         // mostrar el numero que seleccionamos
         tarjeta1 = document.getElementById(id);
-        console.log(tarjeta1)
         primerResultado= numeros[id];
         tarjeta1.innerHTML = `<img src="/estilos/img/${primerResultado}.png" alt="">`;
 
@@ -77,9 +74,10 @@ function destapar(id) {
             // aumentar aciertos
             aciertos++;
             mostarAciertos.innerHTML= `Aciertos: ${aciertos}`;
+            
             setTimeout(() => {
-                 aciertoAudio.play();
-            }, 300);
+                aciertoAudio.play();
+            }, 500);
             if (aciertos == 8) {
                 mostarAciertos.textContent= `Acabas de Ganar!!`
                 setTimeout(() => {
